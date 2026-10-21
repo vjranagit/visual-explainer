@@ -1,0 +1,28 @@
+{
+  "title": "How a thermostat holds a room at 21 °C",
+  "claim": "The thermostat compares room temperature with the set point and switches the boiler, so heat loss and heating form one loop.",
+  "groups": [
+    {"name": "Control", "nodes": [
+      {"id": "setpoint", "label": "Set point", "note": "21 °C from schedule"},
+      {"id": "thermostat", "label": "Thermostat", "note": "on below 20.5, off above 21.5"}
+    ]},
+    {"name": "Heating", "nodes": [
+      {"id": "boiler", "label": "Boiler", "note": "burns gas, heats water"},
+      {"id": "radiator", "label": "Radiators"}
+    ]},
+    {"name": "Room", "nodes": [
+      {"id": "air", "label": "Room air"},
+      {"id": "sensor", "label": "Temperature sensor", "note": "reads every 30 s"},
+      {"id": "loss", "label": "Heat loss", "note": "walls and windows"}
+    ]}
+  ],
+  "links": [
+    {"from": "setpoint", "to": "thermostat", "verb": "sets target"},
+    {"from": "thermostat", "to": "boiler", "verb": "switches on/off"},
+    {"from": "boiler", "to": "radiator", "verb": "pumps hot water"},
+    {"from": "radiator", "to": "air", "verb": "warms"},
+    {"from": "air", "to": "loss", "verb": "cools through"},
+    {"from": "air", "to": "sensor", "verb": "measured by"},
+    {"from": "sensor", "to": "thermostat", "verb": "reports temperature"}
+  ]
+}
